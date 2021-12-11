@@ -9,4 +9,5 @@ public class UserUpdateEvent {
     private String l_name;
     private String phone_number;
     private String email;
+
 }

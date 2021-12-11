@@ -1,6 +1,7 @@
 package com.example.demo.core;
 
 import lombok.Data;
+import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 
@@ -13,6 +14,7 @@ public class UserEntity implements Serializable {
 
 
     private static final long serialVersionUID = 3106264412778629176L;
+    @Id
     private String id;
     private String f_name;
     private String l_name;
@@ -21,4 +23,7 @@ public class UserEntity implements Serializable {
     private String email;
     private String phone_number;
     private String usertype;
+    private String idCard;
+    private String pictureIdCard;
+
 }

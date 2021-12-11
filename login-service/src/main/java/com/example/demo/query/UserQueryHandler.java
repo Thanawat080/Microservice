@@ -1,7 +1,7 @@
 package com.example.demo.query;
 
 import com.example.demo.core.UserEntity;
-import com.example.demo.core.data.UserRepository;
+import com.example.demo.core.event.data.UserRepository;
 import com.example.demo.query.rest.UserRestModel;
 import org.axonframework.queryhandling.QueryHandler;
 import org.springframework.beans.BeanUtils;
@@ -9,7 +9,6 @@ import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
 @Component
 public class UserQueryHandler {

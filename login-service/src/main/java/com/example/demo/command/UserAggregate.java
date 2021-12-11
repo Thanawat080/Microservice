@@ -1,16 +1,21 @@
 package com.example.demo.command;
 
+import com.example.demo.core.event.UserChangepassEvent;
 import com.example.demo.core.event.UserCreatedEvent;
 import com.example.demo.core.event.UserUpdateEvent;
+import com.example.demo.core.event.UserUpdateIdCardEvent;
 import org.axonframework.commandhandling.CommandHandler;
 import org.axonframework.eventsourcing.EventSourcingHandler;
 import org.axonframework.modelling.command.AggregateIdentifier;
 import org.axonframework.modelling.command.AggregateLifecycle;
 import org.axonframework.spring.stereotype.Aggregate;
+import org.jetbrains.annotations.NotNull;
 import org.springframework.beans.BeanUtils;
+import org.springframework.beans.factory.annotation.Autowired;
 
 @Aggregate
 public class UserAggregate {
+
 
     @AggregateIdentifier
     private  String id;
@@ -21,6 +26,9 @@ public class UserAggregate {
     private  String email;
     private  String phone_number;
     private  String usertype;
+    private String idCard;
+    private String pictureIdCard;
+
 
     public UserAggregate(){
 
@@ -60,4 +68,40 @@ public class UserAggregate {
         this.l_name = userUpdateEvent.getL_name();
         this.phone_number = userUpdateEvent.getPhone_number();
     }
+
+
+    @CommandHandler
+    public void handle(UserUpdateIdCardCommand userUpdateIdCardCommand){
+        UserUpdateIdCardEvent userUpdateEvent = new UserUpdateIdCardEvent();
+        BeanUtils.copyProperties(userUpdateIdCardCommand, userUpdateEvent);
+        AggregateLifecycle.apply(userUpdateEvent);
+    }
+
+
+    @EventSourcingHandler
+    public void on(UserUpdateIdCardEvent userUpdateIdCardEvent){
+        this.id = userUpdateIdCardEvent.getId();
+        this.idCard = userUpdateIdCardEvent.getIdCard();
+        this.pictureIdCard = userUpdateIdCardEvent.getPictureIdCard();
+
+    }
+
+
+    @CommandHandler
+    public void handle(UpdateChangepassCommand updateChangepassCommand){
+        UserChangepassEvent userChangepassEvent = new UserChangepassEvent();
+        BeanUtils.copyProperties(updateChangepassCommand, userChangepassEvent);
+        AggregateLifecycle.apply(userChangepassEvent);
+    }
+
+    @EventSourcingHandler
+    public void on(UserChangepassEvent userChangepassEvent){
+        this.id = userChangepassEvent.getId();
+        this.password = userChangepassEvent.getNewpass();
+
+
+    }
+
+
+
 }
