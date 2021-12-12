@@ -29,7 +29,7 @@ public class ProductController {
     public ProductController(CommandGateway commandGateway){this.commandGateway = commandGateway;}
 
     @PostMapping
-    public String createStore(@RequestParam("file") MultipartFile[] file, @RequestParam("product_name") String product_name, @RequestParam("price") Integer price, @RequestParam("quantity") Integer quantity, @RequestParam("description") String description, @RequestParam("storeId") String storeId, @RequestParam("category") String category) throws IOException {
+    public String createProduct(@RequestParam("file") MultipartFile[] file, @RequestParam("product_name") String product_name, @RequestParam("price") Integer price, @RequestParam("quantity") Integer quantity, @RequestParam("description") String description, @RequestParam("storeId") String storeId, @RequestParam("category") String category) throws IOException {
         List<String> fileNames = new ArrayList<>();
         try {
 
